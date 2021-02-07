@@ -54,7 +54,7 @@ async function main() {
 
     for (sku of skus) {
       console.log(`Getting status for SKU ${sku}`);
-      let status = state[sku] || null;
+      let status = state[sku].status || null;
       const { name,  productUrl, currentStatus } = await getStatusForSku(sku);
       if (currentStatus !== status) {
         console.log("Status change! " + currentStatus);
@@ -74,7 +74,7 @@ async function main() {
           UPDATE_TEMPLATE(name, currentStatus)
         );
       }
-      console.log(sku, currentStatus);
+      console.log(`Status for ${sku} is ${currentStatus}`);
       state[sku] = { status: currentStatus };
     }
 
